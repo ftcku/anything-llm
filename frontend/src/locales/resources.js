@@ -18,7 +18,8 @@ import English from "./en/common.js";
 import Korean from "./ko/common.js";
 import Spanish from "./es/common.js";
 import French from "./fr/common.js";
-import Mandarin from "./zh/common.js";
+// import Mandarin from "./zh/common.js";
+import Mandarin from "./zh_tw/common.js";
 import German from "./de/common.js";
 import Russian from "./ru/common.js";
 import Italian from "./it/common.js";
@@ -30,9 +31,12 @@ export const resources = {
   en: {
     common: English,
   },
-  zh: {
+  "zh-tw": {
     common: Mandarin,
   },
+  // zh: {
+  //   common: Mandarin,
+  // },
   es: {
     common: Spanish,
   },

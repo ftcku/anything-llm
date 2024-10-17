@@ -100,6 +100,7 @@ const TRANSLATIONS = {
     vector: "Vector Database",
     members: "Members",
     agent: "Agent Configuration",
+    evaluation: "Evaluation Settings",
   },
 
   // General Appearance
@@ -286,6 +287,26 @@ const TRANSLATIONS = {
     },
   },
 
+  // Evaluation Settings
+  evaluation: {
+    standard: {
+      title: "Chat Evaluation Standards",
+      description:
+        "Customize the evaluation standards that will be used to evaluate your dialogue.",
+      add: "Add new evaluation standard",
+      save: "Save Evaluation Standards",
+      heading: "Start with politeness",
+      standard: "the benefits of AnythingLLM",
+      evaluation: "No mention: deduct 5 points,\nMention only 1 item: deduct 4 points,\nMention only 2 items: deduct 2 points,\nMention all 3 items: no deduction.",
+    },
+    table: {
+      heading: "Heading",
+      standard: "Standard",
+      evaluation: "Evaluation",
+    },
+  },
+  
+
   // Workspace Chats
   recorded: {
     title: "Workspace Chats",
@@ -430,7 +451,6 @@ const TRANSLATIONS = {
 
   "embed-chats": {
     title: "Embed Chats",
-    export: "Export",
     description:
       "These are all the recorded chats and messages from any embed that you have published.",
     table: {

@@ -1,0 +1,50 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/anything-llm'
+      - '-f'
+      - './docker/Dockerfile'  # 這裡指定了 Dockerfile 的路徑
+      - '.'
+    dir: '../.'
+    env:
+      - 'ARG_UID=${_ARG_UID}'
+      - 'ARG_GID=${_ARG_GID}'
+
+  # Push the Docker image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/anything-llm'
+
+  # Run the container
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'run'
+      - '-d'
+      - '--name'
+      - 'anything-llm'
+      - '--cap-add=SYS_ADMIN'
+      - '-p'
+      - '3001:3001'
+      - '-v'
+      - './.env:/app/server/.env'
+      - '-v'
+      - '../server/storage:/app/server/storage'
+      - '-v'
+      - '../collector/hotdir/:/app/collector/hotdir'
+      - '-v'
+      - '../collector/outputs/:/app/collector/outputs'
+      - '--user=${_ARG_UID}:${_ARG_GID}'
+      - '--network=anything-llm'
+      - '--add-host=host.docker.internal:host-gateway'
+      - 'gcr.io/$PROJECT_ID/anything-llm'
+
+images:
+  - 'gcr.io/$PROJECT_ID/anything-llm'
+
+substitutions:
+  _ARG_UID: '1000'
+  _ARG_GID: '1000'
